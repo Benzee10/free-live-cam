@@ -4,9 +4,7 @@ const videoSources = [
     "https://c766c4a628.mjedge.net/videos/6/7/f/2/d/67f2d8d8308bf.mp4?expires=1744019274&l=35&ri=1572864&rs=128000&token=3d5d0b711a49364d02fdb8400cc5969e",
     "https://c766c4a628.mjedge.net/videos/6/7/f/2/d/67f2d841bd557.mp4?expires=1744019175&l=35&ri=1572864&rs=128000&token=b636e60be81e67d30b762d74191e7f02",
     "https://c766c4a628.mjedge.net/videos/6/7/f/2/d/67f2d82e91569.mp4?expires=1744018827&l=35&ri=1572864&rs=128000&token=d1500cfca79f4a962015581aa4bb84a7",
-
-    
-    
+    "https://c766c4a628.mjedge.net/videos/5/d/8/0/3/5d803b648de64.mp4?expires=1744020389&l=35&ri=1572864&rs=128000&token=d891a8c435e5577f2f15e171a8738691",
 
 
     // Agrega aquí más URLs de videos según sea necesario
