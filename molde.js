@@ -1,10 +1,8 @@
 const videos = document.querySelectorAll('.video__player');
 const videoSources = [
 
-    "https://c766c4a628.mjedge.net/videos/6/7/e/a/c/67eacd763340a.mp4?expires=1744011656&l=35&ri=1572864&rs=128000&token=c7c69da83267c37d89b43f865ba0e29a",
-    "https://c766c4a628.mjedge.net/videos/6/2/d/3/1/62d312ebef0b4.mp4?expires=1744017886&l=35&ri=1572864&rs=128000&token=798c7feb8b4789e3c184dd0d206e2f37",
-    "https://c766c4a628.mjedge.net/videos/6/0/0/0/e/6000eec8da9a4.mp4?expires=1744018452&l=35&ri=1572864&rs=128000&token=e1fafee841b1b1286c7837378ad2fd85",
-    "https://c766c4a628.mjedge.net/videos/6/0/e/7/8/60e789a353f21.mp4?expires=1744018536&l=35&ri=1572864&rs=128000&token=0b577fc8a21b361ac52192ed2e28a55c",
+    "https://c766c4a628.mjedge.net/videos/6/7/f/2/d/67f2d8d8308bf.mp4?expires=1744019274&l=35&ri=1572864&rs=128000&token=3d5d0b711a49364d02fdb8400cc5969e",
+    "https://c766c4a628.mjedge.net/videos/6/7/f/2/d/67f2d841bd557.mp4?expires=1744019175&l=35&ri=1572864&rs=128000&token=b636e60be81e67d30b762d74191e7f02",
     "https://c766c4a628.mjedge.net/videos/6/7/f/2/d/67f2d82e91569.mp4?expires=1744018827&l=35&ri=1572864&rs=128000&token=d1500cfca79f4a962015581aa4bb84a7",
 
     
