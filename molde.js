@@ -2,7 +2,7 @@ const videos = document.querySelectorAll('.video__player');
 const videoSources = [
 
     "https://c766c4a628.mjedge.net/videos/6/7/e/a/c/67eacd763340a.mp4?expires=1744011656&l=35&ri=1572864&rs=128000&token=c7c69da83267c37d89b43f865ba0e29a",
-    "",
+    "https://c766c4a628.mjedge.net/videos/6/2/d/3/1/62d312ebef0b4.mp4?expires=1744017886&l=35&ri=1572864&rs=128000&token=798c7feb8b4789e3c184dd0d206e2f37",
     "",
     "",
     "",
