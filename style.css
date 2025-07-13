@@ -3,27 +3,31 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 body, html {
   height: 100%;
-  background: #000;
+  overflow: hidden;
   font-family: Arial, sans-serif;
-  overflow: hidden;
+  background: #000;
 }
-
-.video-container {
-  position: relative;
-  width: 100%;
+#reel-container {
   height: 100vh;
-  overflow: hidden;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
 }
-
-.video-container iframe {
+.reel {
+  position: relative;
+  height: 100vh;
+  scroll-snap-align: start;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reel iframe {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border: none;
 }
-
 .overlay {
   position: absolute;
   bottom: 0;
@@ -32,37 +36,25 @@ body, html {
   padding: 20px;
   background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
   color: white;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  z-index: 2;
 }
-
-.caption-box {
-  max-width: 70%;
-}
-
 .username {
   font-weight: bold;
   font-size: 1rem;
   margin-bottom: 5px;
 }
-
 .caption {
   font-size: 0.95rem;
-  line-height: 1.2rem;
+  margin-bottom: 10px;
 }
-
-.action-icons {
+.actions {
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  align-items: center;
+  gap: 20px;
+  font-size: 1.3rem;
 }
-
-.action-icons button {
+.actions button {
   background: none;
   border: none;
   color: white;
-  font-size: 1.4rem;
   cursor: pointer;
 }
