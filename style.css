@@ -83,29 +83,26 @@ body, html {
 }
 
 /* Chat Now Button */
-.chat-now {
-  background-color: #ff69b4;
-  color: #fff;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 20px;
-  font-weight: bold;
-  font-size: 0.85rem;
-  cursor: pointer;
-  animation: bounce 2s infinite;
-  box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
-  transition: transform 0.2s ease;
-  text-decoration: none;
+.user-chat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-/* Bounce animation */
+.chat-now {
+  background: #ff69b4;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  animation: bounce 1.2s infinite;
+}
+
 @keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
 }
 
 /* Popup */
