@@ -11,14 +11,12 @@ body, html {
   background: #000;
 }
 
-/* Scrollable video container */
 #reel-container {
   height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
 }
 
-/* Each reel fills the screen */
 .reel {
   position: relative;
   height: 100vh;
@@ -26,53 +24,60 @@ body, html {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
-/* Iframe video */
-.reel iframe {
+.iframe-wrapper {
+  position: relative;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border: none;
 }
 
-/* Overlay UI on video */
+.iframe-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  object-fit: cover;
+}
+
+.tap-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background: transparent;
+}
+
 .overlay {
   position: absolute;
-  bottom: 100px;
-  left: 0;
-  right: 0;
-  padding: 20px;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
-  color: white;
-  z-index: 2;
-}
-
-/* Username + Chat button row */
-.user-row {
+  bottom: 30px;
+  left: 20px;
+  right: 20px;
+  z-index: 5;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  color: white;
 }
 
-/* Username */
-.username {
+.chat-now {
+  background-color: #ff69b4;
+  padding: 10px 20px;
+  border-radius: 30px;
+  color: white;
+  text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
+  animation: bounce 2s infinite;
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
 }
 
-/* Caption */
-.caption {
-  font-size: 0.95rem;
-  margin-bottom: 10px;
-}
-
-/* Action buttons like heart/comment/share */
 .actions {
   display: flex;
-  gap: 20px;
-  font-size: 1.3rem;
+  gap: 15px;
+  font-size: 1.4rem;
 }
 
 .actions button {
@@ -82,92 +87,19 @@ body, html {
   cursor: pointer;
 }
 
-/* Chat Now Button */
-.user-chat {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 10px;
-}
-
-.chat-now {
-  background: #ff69b4;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  text-decoration: none;
-  margin-bottom: 5px;
-  animation: bounce 1.2s infinite;
-}
-
-.username {
-  font-size: 0.95rem;
-  font-weight: bold;
-  }
-
-/* Popup */
-.popup {
-  position: fixed;
-  z-index: 9999;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(0,0,0,0.8);
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-
-.popup-content {
-  background: #1c1c1c;
-  padding: 30px;
-  border-radius: 10px;
-  color: white;
-  text-align: center;
-  max-width: 90%;
-  width: 360px;
-  box-shadow: 0 0 15px #ff69b4;
-}
-
-.popup .btn-group {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 15px 0;
-  flex-wrap: wrap;
-}
-
-.btn {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  font-size: 0.9rem;
-  color: white;
-  cursor: pointer;
-}
-
-.btn.whatsapp {
-  background-color: #25d366;
-}
-
-.btn.telegram {
-  background-color: #0088cc;
-}
-
-.close-btn {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  color: #ff69b4;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
-  }
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Optional: Responsive scaling for small devices */
+@media (max-width: 600px) {
+  .chat-now {
+    font-size: 0.9rem;
+    padding: 8px 18px;
+  }
   }
