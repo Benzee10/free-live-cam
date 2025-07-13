@@ -31,7 +31,7 @@ body, html {
 /* Iframe video */
 .reel iframe {
   width: 100%;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   border: none;
 }
@@ -87,7 +87,7 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: 100px;
+  margin-bottom: 10px;
 }
 
 .chat-now {
