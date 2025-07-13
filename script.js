@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("reel-container");
 
-  // Load videos from JSON
+  // Load videos
   fetch("videos.json")
     .then(res => res.json())
     .then(data => {
@@ -15,10 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
             allowfullscreen 
           ></iframe>
 
-          <a href="https://redirecting-kappa.vercel.app/" class="chat-now-bounce">💬 Chat Now</a>
-
           <div class="overlay">
-            <div class="username">${video.username}</div>
+            <div class="user-row">
+              <div class="username">@${video.username}</div>
+              <a class="chat-now" href="https://redirecting-kappa.vercel.app/" target="_blank">💬 Chat Now</a>
+            </div>
             <div class="caption">${video.caption}</div>
             <div class="actions">
               <button><i class="fas fa-heart"></i></button>
@@ -34,22 +35,23 @@ document.addEventListener("DOMContentLoaded", () => {
       container.innerHTML = `<p style="color:white;text-align:center;margin-top:40px;">⚠️ Error loading videos</p>`;
     });
 
-  // Show popup on every visit
+  // Telegram & WhatsApp popup
   const popup = document.getElementById("popup");
   const closePopup = document.getElementById("close-popup");
 
+  // Always show popup on visit
   setTimeout(() => {
-    popup.classList.add("show");
-  }, 3000); // Show after 3 seconds
+    popup.style.display = "flex";
+  }, 3000);
 
   closePopup.addEventListener("click", () => {
-    popup.classList.remove("show");
+    popup.style.display = "none";
   });
 
-  // Close when clicking outside content
-  window.addEventListener("click", e => {
+  // Optional: close popup when clicking outside content
+  window.addEventListener("click", (e) => {
     if (e.target === popup) {
-      popup.classList.remove("show");
+      popup.style.display = "none";
     }
   });
 });
