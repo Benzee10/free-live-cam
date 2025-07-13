@@ -3,22 +3,24 @@ const container = document.getElementById("reel-container");
 fetch("videos.json")
   .then(res => res.json())
   .then(data => {
-    data.forEach((videoUrl, index) => {
+    data.forEach((video, index) => {
       const reel = document.createElement("div");
       reel.className = "reel";
 
+      const autoplayUrl = addAutoplayParams(video.url);
+
       reel.innerHTML = `
-        <div class="iframe-wrapper" data-muted="true">
+        <div class="iframe-wrapper">
+          <div class="tap-overlay" data-url="${video.url}"></div>
           <iframe 
-            src="${videoUrl}?autoplay=1&mute=1" 
+            src="${autoplayUrl}" 
             allow="autoplay; encrypted-media" 
             allowfullscreen
+            frameborder="0"
           ></iframe>
-          <div class="tap-overlay" title="Double tap to toggle sound"></div>
         </div>
-
         <div class="overlay">
-          <a class="chat-now bounce" href="https://redirecting-kappa.vercel.app/" target="_blank">💬 Chat Now</a>
+          <a href="https://redirecting-kappa.vercel.app/" class="chat-now">💬 Chat Now</a>
           <div class="actions">
             <button><i class="fas fa-heart"></i></button>
             <button><i class="fas fa-comment"></i></button>
@@ -26,35 +28,35 @@ fetch("videos.json")
           </div>
         </div>
       `;
-
       container.appendChild(reel);
     });
 
-    addDoubleTapHandler();
+    setupTapToToggleMute();
   })
   .catch(err => {
     container.innerHTML = `<p style="color:white;text-align:center;margin-top:40px;">⚠️ Error loading videos</p>`;
   });
 
-function addDoubleTapHandler() {
+function addAutoplayParams(url) {
+  const hasQuery = url.includes("?");
+  const joinChar = hasQuery ? "&" : "?";
+  return `${url}${joinChar}autoplay=1&mute=1&loop=1&controls=0`;
+}
+
+function setupTapToToggleMute() {
   let lastTap = 0;
-
   document.querySelectorAll(".tap-overlay").forEach(overlay => {
-    overlay.addEventListener("touchend", function () {
+    overlay.addEventListener("click", () => {
       const now = new Date().getTime();
-      const tapLength = now - lastTap;
+      const iframe = overlay.nextElementSibling;
+      const rawUrl = overlay.getAttribute("data-url");
 
-      if (tapLength < 300 && tapLength > 0) {
-        const wrapper = this.closest(".iframe-wrapper");
-        const iframe = wrapper.querySelector("iframe");
-        const isMuted = wrapper.getAttribute("data-muted") === "true";
-        const src = new URL(iframe.src);
-        src.searchParams.set("mute", isMuted ? "0" : "1");
-        iframe.src = src.toString();
-        wrapper.setAttribute("data-muted", !isMuted);
+      if (now - lastTap < 400) {
+        // Double tap detected
+        const isMuted = iframe.src.includes("mute=1");
+        iframe.src = addAutoplayParams(rawUrl).replace("mute=1", `mute=${isMuted ? "0" : "1"}`);
       }
-
       lastTap = now;
     });
   });
-          }
+}
