@@ -16,11 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
           ></iframe>
 
           <div class="overlay">
-            <div class="user-row">
+            <div class="user-chat">
               <div class="username">@${video.username}</div>
               <a class="chat-now" href="https://redirecting-kappa.vercel.app/" target="_blank">💬 Chat Now</a>
             </div>
-            <div class="caption">${video.caption}</div>
             <div class="actions">
               <button><i class="fas fa-heart"></i></button>
               <button><i class="fas fa-comment"></i></button>
@@ -35,20 +34,18 @@ document.addEventListener("DOMContentLoaded", () => {
       container.innerHTML = `<p style="color:white;text-align:center;margin-top:40px;">⚠️ Error loading videos</p>`;
     });
 
-  // Telegram & WhatsApp popup
+  // Popup
   const popup = document.getElementById("popup");
   const closePopup = document.getElementById("close-popup");
 
-  // Always show popup on visit
   setTimeout(() => {
     popup.style.display = "flex";
-  }, 3000);
+  }, 8000);
 
   closePopup.addEventListener("click", () => {
     popup.style.display = "none";
   });
 
-  // Optional: close popup when clicking outside content
   window.addEventListener("click", (e) => {
     if (e.target === popup) {
       popup.style.display = "none";
