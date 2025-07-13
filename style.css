@@ -7,7 +7,7 @@
 body, html {
   height: 100%;
   overflow: hidden;
-  font-family: Arial, sans-serif;
+  font-family: sans-serif;
   background: #000;
 }
 
@@ -18,88 +18,35 @@ body, html {
 }
 
 .reel {
-  position: relative;
   height: 100vh;
   scroll-snap-align: start;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
 
-.iframe-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.iframe-wrapper iframe {
+.reel iframe {
   width: 100%;
   height: 100%;
   border: none;
-  object-fit: cover;
+  pointer-events: none; /* prevent unwanted touches */
 }
 
-.tap-overlay {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  background: transparent;
-}
-
-.overlay {
-  position: absolute;
-  bottom: 100px;
-  left: 20px;
+.chat-button {
+  position: fixed;
+  bottom: 20px;
   right: 20px;
-  z-index: 5;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 10px;
+  background: #ff4081;
   color: white;
-}
-
-.chat-now {
-  background-color: #ff69b4;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border-radius: 30px;
-  color: white;
-  text-decoration: none;
   font-weight: bold;
-  font-size: 1rem;
+  text-decoration: none;
   animation: bounce 2s infinite;
-  box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
-}
-
-.actions {
-  display: flex;
-  gap: 15px;
-  font-size: 1.4rem;
-}
-
-.actions button {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
+  z-index: 999;
 }
 
 @keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
-
-/* Optional: Responsive scaling for small devices */
-@media (max-width: 600px) {
-  .chat-now {
-    font-size: 0.9rem;
-    padding: 8px 18px;
-  }
-  }
