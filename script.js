@@ -1,35 +1,30 @@
 const container = document.getElementById("reel-container");
-let lastTapTime = 0;
 
-fetch("videos.json") // Change to full URL if hosted elsewhere
+fetch("videos.json")
   .then(res => res.json())
-  .then(data => {
-    data.forEach(video => {
+  .then(urls => {
+    urls.forEach(url => {
       const reel = document.createElement("div");
       reel.className = "reel";
-      reel.innerHTML = `
-        <iframe 
-          src="${video.url}?autoplay=1&mute=1" 
-          allow="autoplay; encrypted-media" 
-          allowfullscreen
-        ></iframe>
-      `;
-      container.appendChild(reel);
 
-      // Add double-tap mute toggle
-      reel.addEventListener("touchend", function (e) {
-        const now = new Date().getTime();
-        if (now - lastTapTime < 300) {
-          const iframe = reel.querySelector("iframe");
-          let src = iframe.src;
-          const isMuted = src.includes("mute=1");
-          iframe.src = src.replace(/mute=\d/, `mute=${isMuted ? 0 : 1}`);
-        }
-        lastTapTime = now;
+      // Create play overlay and empty iframe
+      const iframe = document.createElement("iframe");
+      iframe.style.display = "none";
+
+      const overlay = document.createElement("div");
+      overlay.className = "play-overlay";
+
+      overlay.addEventListener("click", () => {
+        iframe.src = url;
+        iframe.style.display = "block";
+        overlay.style.display = "none";
       });
+
+      reel.appendChild(iframe);
+      reel.appendChild(overlay);
+      container.appendChild(reel);
     });
   })
   .catch(err => {
-    console.error("Video loading error:", err);
-    container.innerHTML = `<p style="color: white; padding: 20px;">⚠️ Failed to load videos</p>`;
+    container.innerHTML = `<p style="color:white;padding:40px;text-align:center;">⚠️ Error loading videos</p>`;
   });
