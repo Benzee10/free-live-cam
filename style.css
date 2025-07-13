@@ -70,8 +70,8 @@ body, html {
 }
 
 /* 🔥 Bouncing Chat Button */
-.chat-now-bounce {
-  position: absolute;
+..chat-now-bounce {
+  position: fixed;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
@@ -82,9 +82,9 @@ body, html {
   font-size: 1rem;
   text-decoration: none;
   animation: bounce 2s infinite;
-  z-index: 10;
+  z-index: 999;
   box-shadow: 0 0 10px rgba(255, 105, 180, 0.6);
-}
+  }
 
 @keyframes bounce {
   0%, 100% { transform: translate(-50%, 0); }
