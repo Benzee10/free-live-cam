@@ -1,6 +1,6 @@
 const container = document.getElementById("reel-container");
 
-// Load videos from JSON
+// Fetch and render reels
 fetch("videos.json")
   .then(res => res.json())
   .then(data => {
@@ -8,13 +8,11 @@ fetch("videos.json")
       const reel = document.createElement("div");
       reel.className = "reel";
       reel.innerHTML = `
-        <div class="iframe-wrapper">
-          <iframe 
-            src="${video.url}" 
-            allow="autoplay; encrypted-media" 
-            allowfullscreen 
-          ></iframe>
-        </div>
+        <iframe 
+          src="${video.url}" 
+          allow="autoplay; encrypted-media" 
+          allowfullscreen 
+        ></iframe>
         <div class="overlay">
           <div class="username">@${video.username}</div>
           <div class="caption">${video.caption}</div>
@@ -24,7 +22,18 @@ fetch("videos.json")
             <button><i class="fas fa-share"></i></button>
           </div>
         </div>
-        <a href="https://redirecting-kappa.vercel.app/" class="chat-now-btn">💬 Chat Now</a>
+        <div style="text-align:center; margin: 15px 0;">
+          <a href="https://redirecting-kappa.vercel.app/" target="_blank" style="
+            display:inline-block;
+            padding:12px 24px;
+            background:#ff69b4;
+            color:white;
+            font-weight:bold;
+            border-radius:50px;
+            text-decoration:none;
+            animation: bounce 1.5s infinite;
+          ">💬 Chat Now</a>
+        </div>
       `;
       container.appendChild(reel);
     });
@@ -33,22 +42,29 @@ fetch("videos.json")
     container.innerHTML = `<p style="color:white;text-align:center;margin-top:40px;">⚠️ Error loading videos</p>`;
   });
 
-// Floating scroll indicator
-window.addEventListener("scroll", () => {
-  const scrollTop = window.scrollY;
-  const docHeight = document.body.scrollHeight - window.innerHeight;
-  const scrollPercent = (scrollTop / docHeight) * 100;
-  document.querySelector(".scroll-progress").style.height = scrollPercent + "%";
+// Scroll progress indicator
+const scrollIndicator = document.querySelector(".scroll-progress");
+container.addEventListener("scroll", () => {
+  const scrollTop = container.scrollTop;
+  const scrollHeight = container.scrollHeight - container.clientHeight;
+  const scrolled = (scrollTop / scrollHeight) * 100;
+  scrollIndicator.style.height = `${scrolled}%`;
 });
 
-// Telegram & WhatsApp popup once per session
+// Pop-up modal (always shows on visit)
 window.addEventListener("DOMContentLoaded", () => {
-  const popup = document.getElementById("social-popup");
-  if (!sessionStorage.getItem("shownPopup")) {
-    popup.classList.add("show");
-    sessionStorage.setItem("shownPopup", "yes");
-  }
-  document.getElementById("popup-close").onclick = () => {
+  const popup = document.getElementById("popup");
+  const closePopup = document.getElementById("close-popup");
+
+  popup.classList.add("show");
+
+  closePopup.addEventListener("click", () => {
     popup.classList.remove("show");
-  };
+  });
+
+  window.addEventListener("click", e => {
+    if (e.target === popup) {
+      popup.classList.remove("show");
+    }
+  });
 });
