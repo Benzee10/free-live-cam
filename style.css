@@ -58,3 +58,21 @@ body, html {
   color: white;
   cursor: pointer;
 }
+.scroll-indicator {
+  position: fixed;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 60vh;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  z-index: 1000;
+}
+.scroll-progress {
+  width: 100%;
+  height: 0;
+  background: #ff69b4;
+  border-radius: 10px;
+  transition: height 0.3s ease;
+}
