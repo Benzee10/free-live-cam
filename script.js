@@ -1,6 +1,7 @@
 const container = document.getElementById("reel-container");
+let lastTapTime = 0;
 
-fetch("https://your-app.vercel.app/videos.json") // replace with your actual URL
+fetch("videos.json") // Change to full URL if hosted elsewhere
   .then(res => res.json())
   .then(data => {
     data.forEach(video => {
@@ -11,13 +12,24 @@ fetch("https://your-app.vercel.app/videos.json") // replace with your actual URL
           src="${video.url}?autoplay=1&mute=1" 
           allow="autoplay; encrypted-media" 
           allowfullscreen
-          frameborder="0"
         ></iframe>
       `;
       container.appendChild(reel);
+
+      // Add double-tap mute toggle
+      reel.addEventListener("touchend", function (e) {
+        const now = new Date().getTime();
+        if (now - lastTapTime < 300) {
+          const iframe = reel.querySelector("iframe");
+          let src = iframe.src;
+          const isMuted = src.includes("mute=1");
+          iframe.src = src.replace(/mute=\d/, `mute=${isMuted ? 0 : 1}`);
+        }
+        lastTapTime = now;
+      });
     });
   })
   .catch(err => {
-    container.innerHTML = `<p style="color:white;text-align:center;margin-top:40px;">⚠️ Error loading videos</p>`;
-    console.error("Error loading videos:", err);
+    console.error("Video loading error:", err);
+    container.innerHTML = `<p style="color: white; padding: 20px;">⚠️ Failed to load videos</p>`;
   });
