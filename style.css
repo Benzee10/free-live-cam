@@ -9,11 +9,13 @@ body, html {
   font-family: Arial, sans-serif;
   background: #000;
 }
+
 #reel-container {
   height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
 }
+
 .reel {
   position: relative;
   height: 100vh;
@@ -23,77 +25,90 @@ body, html {
   justify-content: center;
   flex-direction: column;
 }
+
 .reel iframe {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   border: none;
+  object-fit: cover;
 }
+
 .overlay {
   position: absolute;
-  bottom: 0;
+  bottom: 80px;
   left: 0;
   right: 0;
   padding: 20px;
-  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
   color: white;
   z-index: 2;
+  text-align: left;
 }
+
 .username {
   font-weight: bold;
   font-size: 1rem;
   margin-bottom: 5px;
 }
+
 .caption {
   font-size: 0.95rem;
   margin-bottom: 10px;
 }
+
 .actions {
   display: flex;
   gap: 20px;
   font-size: 1.3rem;
 }
+
 .actions button {
   background: none;
   border: none;
   color: white;
   cursor: pointer;
 }
-.scroll-indicator {
-  position: fixed;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 6px;
-  height: 60vh;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  z-index: 1000;
-}
-.scroll-progress {
-  width: 100%;
-  height: 0;
+
+/* 🔥 Bouncing Chat Button */
+.chat-now-bounce {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   background: #ff69b4;
-  border-radius: 10px;
-  transition: height 0.3s ease;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 1rem;
+  text-decoration: none;
+  animation: bounce 2s infinite;
+  z-index: 10;
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.6);
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, -10px); }
 }
 
 /* 🔥 Popup */
 .popup {
   display: none;
   position: fixed;
-  z-index: 9999;
+  z-index: 999;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(12, 0, 22, 0.85);
+  background: rgba(0, 0, 0, 0.85);
   justify-content: center;
   align-items: center;
 }
+
 .popup.show {
   display: flex;
 }
+
 .popup-content {
   background: #1c0e22;
   border: 3px solid #ff69b4;
@@ -104,45 +119,68 @@ body, html {
   max-width: 400px;
   width: 90%;
   box-shadow: 0 0 20px #ff69b4;
+  animation: popupBounce 0.6s ease;
   position: relative;
 }
+
+@keyframes popupBounce {
+  0% { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.popup-content h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #ff99cc;
+}
+
+.popup-content p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  color: #e8cce8;
+}
+
 .btn-group {
-  margin: 15px 0;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
 }
+
 .btn {
-  padding: 12px;
-  border-radius: 30px;
-  background-color: #ff69b4;
-  color: white;
-  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border-radius: 50px;
   text-decoration: none;
-  display: inline-block;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(255, 105, 180, 0.4);
+  color: white;
 }
+
 .btn.whatsapp {
   background-color: #25d366;
 }
+
 .btn.telegram {
   background-color: #0088cc;
 }
+
+.btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
 .close-btn {
   position: absolute;
   top: 10px;
   right: 15px;
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 24px;
   color: #ff69b4;
+  font-weight: bold;
   cursor: pointer;
-}
-
-/* 🔁 Bounce Animation for Chat Now button */
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  }
+       }
