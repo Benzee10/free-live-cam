@@ -9,13 +9,13 @@ body, html {
 }
 
 #reel-container {
-  height: 100vh;
+  height: auto;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
 }
 
 .reel {
-  height: 100vh;
+  height: auto;
   scroll-snap-align: start;
   position: relative;
   display: flex;
@@ -25,7 +25,7 @@ body, html {
 
 .reel iframe {
   width: 100%;
-  height: 100%;
+  height: auto;
   border: none;
 }
 
