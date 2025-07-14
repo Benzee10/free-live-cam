@@ -1,43 +1,66 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("reel-container");
+document.addEventListener("DOMContentLoaded", function () {
+  const videoContainer = document.getElementById("video-container");
 
-  // Shuffle the video links
-  const shuffled = [...videoLinks].sort(() => 0.5 - Math.random());
+  // ========== Load Random Iframe from iframe.js ==========
+  if (Array.isArray(videoLinks) && videoLinks.length > 0) {
+    const randomIndex = Math.floor(Math.random() * videoLinks.length);
+    const selectedVideo = videoLinks[randomIndex];
 
-  shuffled.forEach((url) => {
-    const reel = document.createElement("div");
-    reel.className = "reel";
+    const iframe = document.createElement("iframe");
+    iframe.src = selectedVideo;
+    iframe.allowFullscreen = true;
+    iframe.frameBorder = "0";
+    iframe.width = "100%";
+    iframe.height = "100%";
 
-    reel.innerHTML = `
-      <iframe src="${url}" allowfullscreen></iframe>
-      <button class="chat-now" onclick="window.open('https://redirecting-kappa.vercel.app/', '_blank')">💬 Chat Now</button>
-      <button class="mute-btn">🔇</button>
-    `;
+    videoContainer.appendChild(iframe);
+  }
 
-    container.appendChild(reel);
+  // ========== Show POPUP Once Per Day ==========
+  const popup = document.getElementById("popup");
+  const closeBtn = document.getElementById("close-popup");
+
+  const lastShown = localStorage.getItem("popupLastShown");
+  const now = new Date().toISOString().split("T")[0];
+
+  if (lastShown !== now) {
+    setTimeout(() => {
+      popup.classList.add("show");
+      localStorage.setItem("popupLastShown", now);
+    }, 5000);
+  }
+
+  closeBtn.addEventListener("click", () => {
+    popup.classList.remove("show");
   });
 
-  // Popup for WhatsApp & Telegram after 5s
-  setTimeout(() => {
-    const popup = document.createElement("div");
-    popup.className = "popup";
-    popup.innerHTML = `
-      <div class="popup-inner">
-        <span class="close-popup">&times;</span>
-        <p>Join our secret groups for 🔞 content!</p>
-        <a href="https://whatsapp.com/channel/0029VaMsUAp7tkjI8KcaRn10" class="btn">WhatsApp</a>
-        <a href="https://t.me/Xibabes" class="btn telegram">Telegram</a>
-      </div>
-    `;
-    document.body.appendChild(popup);
+  // ========== Register Now Button Logic ==========
+  const registerBtn = document.getElementById("register-now");
 
-    popup.querySelector(".close-popup").onclick = () => popup.remove();
+  setTimeout(() => {
+    registerBtn.style.display = "flex";
   }, 5000);
 
-  // Global mute toggle (iframe workaround doesn't allow controlling iframe volume)
-  document.addEventListener("click", function (e) {
-    if (e.target.classList.contains("mute-btn")) {
-      alert("Iframe audio control is not supported due to browser sandboxing. Please use video mp4 format if you want mute/unmute functionality.");
+  registerBtn.addEventListener("click", () => {
+    window.open("https://redirecting-kappa.vercel.app/", "_blank");
+    registerBtn.style.display = "none"; // hide after interaction
+  });
+
+  // ========== Optional: Scroll to Top on Pull Refresh ==========
+  let isRefreshing = false;
+  let startY = 0;
+
+  document.addEventListener("touchstart", (e) => {
+    if (document.documentElement.scrollTop === 0) {
+      startY = e.touches[0].clientY;
+    }
+  });
+
+  document.addEventListener("touchend", (e) => {
+    const endY = e.changedTouches[0].clientY;
+    if (endY - startY > 120 && !isRefreshing) {
+      isRefreshing = true;
+      location.reload();
     }
   });
 });
