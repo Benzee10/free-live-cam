@@ -1,29 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("reel-container");
-  const randomLinks = [...videoLinks].sort(() => 0.5 - Math.random());
+  const container = document.getElementById("video-container");
 
-  randomLinks.forEach(link => {
-    const reel = document.createElement("div");
-    reel.className = "reel";
+  // Randomize iframe links
+  const shuffled = videoLinks.sort(() => 0.5 - Math.random());
+
+  shuffled.forEach(url => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "iframe-wrapper";
 
     const iframe = document.createElement("iframe");
-    iframe.src = link;
+    iframe.src = url;
     iframe.allowFullscreen = true;
-    iframe.scrolling = "no";
-    iframe.frameBorder = "0";
+    iframe.loading = "lazy";
 
-    reel.appendChild(iframe);
-    container.appendChild(reel);
+    wrapper.appendChild(iframe);
+    container.appendChild(wrapper);
   });
 
-  // Popup logic
-  const popup = document.getElementById("popup");
-  const closeBtn = document.getElementById("close-popup");
-  setTimeout(() => popup.classList.add("show"), 5000);
-  closeBtn.addEventListener("click", () => popup.classList.remove("show"));
+  // Chat and Register Buttons
+  const chatBtn = document.getElementById("chatBtn");
+  const registerBtn = document.getElementById("registerBtn");
 
-  // Show register button after 5 seconds
+  chatBtn.addEventListener("click", () => chatBtn.style.display = "none");
+  registerBtn.addEventListener("click", () => registerBtn.style.display = "none");
+
+  // Popup after 4s
   setTimeout(() => {
-    document.querySelector(".register-btn").style.display = "block";
-  }, 5000);
+    document.getElementById("popup").style.display = "flex";
+  }, 4000);
+
+  document.getElementById("closePopup").onclick = () => {
+    document.getElementById("popup").style.display = "none";
+  };
 });
