@@ -1,183 +1,98 @@
-body {
-    margin: 0;
-    overflow: hidden; /* Hide scrollbar for the body */
-    font-family: sans-serif;
-    background-color: #000;
-    color: #fff;
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: sans-serif;
 }
 
 #video-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow-y: scroll; /* Enable vertical scrolling */
-    scroll-snap-type: y mandatory; /* Enable snapping for vertical scrolling */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  display: flex;
+  flex-direction: column;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
 }
 
-#video-container::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for Webkit browsers */
+#video-container iframe {
+  width: 100vw;
+  height: 100vh;
+  border: none;
+  scroll-snap-align: start;
 }
 
-.video-slide {
-    flex-shrink: 0;
-    width: 100vw;
-    height: 100vh;
-    scroll-snap-align: start;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #000; /* Fallback background for video slides */
+#button-container {
+  position: fixed;
+  left: 10px;
+  top: 40%;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.video-slide iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
+.side-button {
+  background-color: #ff5a5f;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 16px;
+  animation: bounce 2s infinite;
+  text-align: center;
+  width: 120px;
 }
 
-/* --- Buttons Container --- */
-.buttons-container {
-    position: fixed;
-    left: 20px; /* Adjust as needed */
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Space between buttons */
-    z-index: 100; /* Ensure buttons are above videos */
-}
-
-.action-button {
-    background-color: rgba(220, 20, 60, 0.9); /* Crimson red with some transparency */
-    color: white;
-    padding: 12px 20px;
-    border-radius: 30px; /* Pill shape */
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: transform 0.2s ease-in-out, background-color 0.2s;
-    animation: bounce 1s infinite alternate; /* Bouncing animation */
-}
-
-.action-button:hover {
-    background-color: rgba(255, 0, 50, 0.9);
-    transform: translateY(-50%) scale(1.05); /* Slightly bigger on hover */
-}
-
-/* Bouncing animation */
 @keyframes bounce {
-    0% { transform: translateY(-50%) scale(1); }
-    100% { transform: translateY(-55%) scale(1.02); }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-/* --- Modal Styles --- */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 200; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.7); /* Black w/ opacity */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+#popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
 }
 
-.modal.show {
-    opacity: 1;
-    visibility: visible;
+.popup-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+  width: 90%;
+  max-width: 400px;
 }
 
-.modal-content {
-    background-color: #333;
-    margin: auto;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-    width: 80%; /* Adjust width as needed */
-    max-width: 400px; /* Max width for larger screens */
-    text-align: center;
-    position: relative;
-    transform: scale(0.9);
-    transition: transform 0.3s ease-in-out;
+.popup-buttons a {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #007aff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
-.modal.show .modal-content {
-    transform: scale(1);
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
 }
 
-.modal-content h2 {
-    color: #fff;
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 24px;
-}
-
-.modal-content p {
-    color: #ccc;
-    margin-bottom: 25px;
-    font-size: 16px;
-}
-
-.close-button {
-    color: #aaa;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.2s;
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: #fff;
-    text-decoration: none;
-}
-
-.modal-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.modal-button {
-    display: block;
-    padding: 12px 25px;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 17px;
-    transition: background-color 0.2s ease-in-out, transform 0.1s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.modal-button.whatsapp {
-    background-color: #25D366; /* WhatsApp green */
-    color: white;
-}
-
-.modal-button.whatsapp:hover {
-    background-color: #1DA851;
-    transform: translateY(-2px);
-}
-
-.modal-button.telegram {
-    background-color: #0088CC; /* Telegram blue */
-    color: white;
-}
-
-.modal-button.telegram:hover {
-    background-color: #006699;
-    transform: translateY(-2px);
+.hidden {
+  display: none;
 }
