@@ -27,14 +27,14 @@ body, html {
 }
 
 #video-container {
-  height: 100vh;
+  height: 100%;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   -webkit-overflow-scrolling: touch;
 }
 
 .iframe-wrapper {
-  height: 100vh;
+  height: 100%;
   scroll-snap-align: start;
   position: relative;
   display: flex;
