@@ -1,132 +1,116 @@
-body {
+* {
   margin: 0;
   padding: 0;
-  background: #000;
-  color: white;
+  box-sizing: border-box;
+}
+body, html {
+  height: 100%;
+  overflow: hidden;
   font-family: Arial, sans-serif;
-  overflow-x: hidden;
+  background: #000;
 }
 
-#video-container {
-  max-width: 760px;
-  margin: 0 auto;
-  padding-bottom: 120px;
+#reel-container {
   height: 100vh;
-  overflow-y: auto;
+  overflow-y: scroll;
   scroll-snap-type: y mandatory;
 }
-
-.video-wrapper {
-  height: 100vh;
+.reel {
   scroll-snap-align: start;
+  height: 100vh;
   position: relative;
 }
-
-iframe {
+.reel iframe {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   border: none;
 }
 
+/* Chat Now Button */
 .chat-now {
   position: fixed;
-  bottom: 100px;
   left: 10px;
-  background: #25d366;
+  top: 40%;
+  background-color: #ff69b4;
   color: white;
-  padding: 10px 20px;
+  padding: 10px 18px;
   border-radius: 30px;
   font-weight: bold;
   text-decoration: none;
-  animation: bounce 1.5s infinite;
   z-index: 1000;
+  animation: bounce 1.5s infinite;
 }
 
+/* Register Button */
 .register-btn {
   position: fixed;
-  bottom: 40px;
   left: 10px;
-  background: #ff1493;
+  top: 52%;
+  background-color: #25d366;
   color: white;
-  border: none;
-  padding: 12px 22px;
-  font-size: 1rem;
-  border-radius: 25px;
-  cursor: pointer;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
   z-index: 1000;
   display: none;
 }
 
-.scroll-down {
-  position: fixed;
-  bottom: 20px;
-  right: 15px;
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-  border: none;
-  font-size: 1.4rem;
-  border-radius: 50%;
-  padding: 10px 14px;
-  cursor: pointer;
-  z-index: 1001;
-}
-
+/* Popup */
 .popup {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8);
   display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.8);
   justify-content: center;
   align-items: center;
-  z-index: 1001;
 }
-
 .popup.show {
   display: flex;
 }
-
 .popup-content {
-  background: #111;
-  padding: 30px;
-  border-radius: 10px;
+  background: #1c0e22;
+  border: 2px solid #ff69b4;
+  padding: 20px;
+  border-radius: 15px;
   text-align: center;
-  max-width: 90%;
-  box-shadow: 0 0 15px #ff69b4;
-  position: relative;
+  color: #fff;
+  max-width: 350px;
+  width: 90%;
 }
-
 .close-btn {
   position: absolute;
-  top: 15px;
-  right: 20px;
-  font-size: 24px;
-  color: white;
+  top: 8px;
+  right: 12px;
+  font-size: 22px;
+  color: #ff69b4;
   cursor: pointer;
 }
 
+/* Buttons */
 .btn-group {
-  margin-top: 15px;
   display: flex;
-  gap: 10px;
   justify-content: center;
-  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 15px;
 }
 .btn {
-  text-decoration: none;
   padding: 10px 20px;
   border-radius: 30px;
-  font-weight: bold;
+  text-decoration: none;
   color: white;
+  font-weight: bold;
 }
 .btn.whatsapp {
-  background: #25d366;
+  background-color: #25d366;
 }
 .btn.telegram {
-  background: #0088cc;
+  background-color: #0088cc;
 }
 
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
-  }
+}
