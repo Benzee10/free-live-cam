@@ -7,116 +7,127 @@
 body, html {
   height: 100%;
   overflow: hidden;
-  font-family: 'Arial', sans-serif;
-  background: #000;
-  color: #fff;
+  font-family: 'Playfair Display', serif;
+  background: linear-gradient(180deg, #0b0b0b, #1c0e22);
+  color: #ffe6f1;
+  scroll-behavior: smooth;
 }
 
 #video-container {
-  height: 100%;
+  height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
 }
 
-#video-container iframe {
-  width: 100%;
-  height: 400;
-  border: none;
+.iframe-wrapper {
+  height: 100vh;
   scroll-snap-align: start;
-}
-
-/* CHAT NOW BUTTON (Left) */
-.chat-now-btn {
-  position: fixed;
-  left: 10px;
-  bottom: 80px;
-  background-color: #ff69b4;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  z-index: 999;
-  animation: bounce 1.5s infinite;
+  position: relative;
   display: flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
-}
-
-/* REGISTER NOW BUTTON (Left - Delayed) */
-.register-btn {
-  position: fixed;
-  left: 10px;
-  bottom: 140px;
-  background-color: #00b894;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  z-index: 999;
-  animation: bounce 1.5s infinite;
-  display: none; /* will be shown after 5s by script */
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 0 15px rgba(0, 255, 200, 0.5);
-}
-
-/* BOUNCE ANIMATION */
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-/* POPUP STYLES */
-.popup {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(12, 0, 22, 0.85);
   justify-content: center;
   align-items: center;
 }
 
-.popup.show {
-  display: flex;
+.iframe-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Chat Now Button */
+#chat-now {
+  position: fixed;
+  left: 15px;
+  bottom: 60px;
+  z-index: 1000;
+  background: #ff69b4;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  box-shadow: 0 0 10px #ff69b4;
+  animation: bounce 1.5s infinite;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+#chat-now:hover {
+  transform: scale(1.1);
+}
+
+/* Register Now Button */
+#register-now {
+  position: fixed;
+  left: 15px;
+  bottom: 120px;
+  z-index: 1000;
+  background: #00cc99;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  box-shadow: 0 0 10px #00cc99;
+  cursor: pointer;
+  display: none;
+  animation: bounce 1.5s infinite;
+}
+
+#register-now:hover {
+  transform: scale(1.1);
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
 }
 
 .popup-content {
   background: #1c0e22;
-  padding: 30px 20px;
+  padding: 30px;
   border-radius: 15px;
-  text-align: center;
-  color: #ffe6f1;
   max-width: 400px;
   width: 90%;
+  text-align: center;
+  color: white;
+  border: 3px solid #ff69b4;
   box-shadow: 0 0 20px #ff69b4;
-  position: relative;
-  animation: bounceIn 0.7s ease;
+  animation: fadeIn 0.5s ease;
 }
 
-.btn-group {
+.popup-content .btn-group {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   gap: 15px;
-  margin-top: 20px;
   flex-wrap: wrap;
 }
 
 .btn {
-  display: inline-block;
-  padding: 12px 24px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: bold;
+  background-color: #ff69b4;
   color: white;
-  font-size: 0.9rem;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   transition: 0.3s;
+}
+
+.btn:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
 }
 
 .btn.whatsapp {
@@ -127,25 +138,23 @@ body, html {
   background-color: #0088cc;
 }
 
-.btn:hover {
-  transform: scale(1.05);
-  opacity: 0.9;
-}
-
 .close-btn {
   position: absolute;
   top: 10px;
-  right: 15px;
+  right: 20px;
   font-size: 28px;
   font-weight: bold;
   color: #ff69b4;
   cursor: pointer;
 }
 
-/* POPUP BOUNCE IN */
-@keyframes bounceIn {
-  0% { transform: scale(0.3); opacity: 0; }
-  50% { transform: scale(1.05); opacity: 1; }
-  70% { transform: scale(0.9); }
-  100% { transform: scale(1); }
+/* Animations */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
   }
