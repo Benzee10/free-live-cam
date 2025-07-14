@@ -28,6 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
     window.open("https://redirecting-kappa.vercel.app/", "_blank");
     registerBtn.style.display = "none";
   });
+  
+  function scrollToNext() {
+  const container = document.getElementById("video-container");
+  const scrollAmount = window.innerHeight;
+  container.scrollBy({ top: scrollAmount, behavior: "smooth" });
+  }
 
   // Pull to refresh
   let startY = 0, isPulling = false;
