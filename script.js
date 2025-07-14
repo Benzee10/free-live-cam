@@ -1,7 +1,10 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const videoContainer = document.getElementById("video-container");
+  const popup = document.getElementById("social-popup");
+  const registerBtn = document.getElementById("register-btn");
+  const pullRefresh = document.getElementById("pull-refresh");
 
-  // ========== Load Random Iframe from iframe.js ==========
+  // === Load random iframe video ===
   if (Array.isArray(videoLinks) && videoLinks.length > 0) {
     const randomIndex = Math.floor(Math.random() * videoLinks.length);
     const selectedVideo = videoLinks[randomIndex];
@@ -9,58 +12,56 @@ document.addEventListener("DOMContentLoaded", function () {
     const iframe = document.createElement("iframe");
     iframe.src = selectedVideo;
     iframe.allowFullscreen = true;
+    iframe.scrolling = "no";
     iframe.frameBorder = "0";
     iframe.width = "100%";
     iframe.height = "100%";
+    iframe.className = "video-iframe";
 
     videoContainer.appendChild(iframe);
   }
 
-  // ========== Show POPUP Once Per Day ==========
-  const popup = document.getElementById("popup");
-  const closeBtn = document.getElementById("close-popup");
+  // === Show popup & register button after 5s ===
+  setTimeout(() => {
+    popup.classList.add("show");
+    registerBtn.classList.add("show");
+  }, 5000);
 
-  const lastShown = localStorage.getItem("popupLastShown");
-  const now = new Date().toISOString().split("T")[0];
-
-  if (lastShown !== now) {
-    setTimeout(() => {
-      popup.classList.add("show");
-      localStorage.setItem("popupLastShown", now);
-    }, 5000);
-  }
-
-  closeBtn.addEventListener("click", () => {
+  // === Close popup on interaction ===
+  document.getElementById("close-popup").addEventListener("click", () => {
     popup.classList.remove("show");
   });
 
-  // ========== Register Now Button Logic ==========
-  const registerBtn = document.getElementById("register-now");
-
-  setTimeout(() => {
-    registerBtn.style.display = "flex";
-  }, 5000);
-
   registerBtn.addEventListener("click", () => {
     window.open("https://redirecting-kappa.vercel.app/", "_blank");
-    registerBtn.style.display = "none"; // hide after interaction
+    registerBtn.classList.remove("show");
   });
 
-  // ========== Optional: Scroll to Top on Pull Refresh ==========
-  let isRefreshing = false;
+  // === Pull-to-refresh logic ===
   let startY = 0;
+  let isPulling = false;
 
-  document.addEventListener("touchstart", (e) => {
-    if (document.documentElement.scrollTop === 0) {
+  videoContainer.addEventListener("touchstart", (e) => {
+    if (videoContainer.scrollTop === 0) {
       startY = e.touches[0].clientY;
+      isPulling = true;
     }
   });
 
-  document.addEventListener("touchend", (e) => {
-    const endY = e.changedTouches[0].clientY;
-    if (endY - startY > 120 && !isRefreshing) {
-      isRefreshing = true;
+  videoContainer.addEventListener("touchmove", (e) => {
+    if (!isPulling) return;
+    const distance = e.touches[0].clientY - startY;
+    if (distance > 50) {
+      pullRefresh.style.top = "10px";
+    }
+  });
+
+  videoContainer.addEventListener("touchend", () => {
+    if (pullRefresh.style.top === "10px") {
+      pullRefresh.innerText = "Refreshing...";
       location.reload();
     }
+    pullRefresh.style.top = "-50px";
+    isPulling = false;
   });
 });
