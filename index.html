@@ -3,35 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pleasure Circle</title>
+  <title>TikTok Style Reels</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-
-  <div id="video-container"></div>
+  <div id="reel-container"></div>
 
   <!-- Chat Now Button -->
-  <a href="https://redirecting-kappa.vercel.app/" target="_blank" class="chat-now">💬 Chat Now</a>
+  <a href="https://redirecting-kappa.vercel.app/" target="_blank" class="chat-now">Chat Now</a>
 
   <!-- Register Button -->
-  <button id="register-btn" class="register-btn" onclick="window.open('https://redirecting-kappa.vercel.app/', '_blank')">
-    🔓 Register Now
-  </button>
-
-  <!-- Scroll Down Button -->
-  <button class="scroll-down" onclick="scrollToNext()">↓</button>
+  <a href="https://redirecting-kappa.vercel.app/" target="_blank" class="register-btn">Register</a>
 
   <!-- Popup -->
   <div id="popup" class="popup">
     <div class="popup-content">
-      <span class="close-btn" onclick="document.getElementById('popup').classList.remove('show')">&times;</span>
-      <h2>🔥 Secret Pleasure Circle</h2>
-      <p>Join our private WhatsApp or Telegram groups now 🔞</p>
+      <h2>Join Our Secret Channels 🔞</h2>
+      <p>Get the best updates via Telegram and WhatsApp</p>
       <div class="btn-group">
         <a href="https://whatsapp.com/channel/0029VaMsUAp7tkjI8KcaRn10" class="btn whatsapp" target="_blank">Join WhatsApp</a>
         <a href="https://t.me/Xibabes" class="btn telegram" target="_blank">Join Telegram</a>
       </div>
+      <span id="close-popup" class="close-btn">&times;</span>
     </div>
   </div>
 
