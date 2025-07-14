@@ -1,69 +1,43 @@
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("reel-container");
 
-  // Create reel section with random iframe
-  function loadRandomVideo() {
-    container.innerHTML = ""; // Clear old content
-    const randomIndex = Math.floor(Math.random() * videoLinks.length);
-    const selected = videoLinks[randomIndex];
+  // Shuffle the video links
+  const shuffled = [...videoLinks].sort(() => 0.5 - Math.random());
 
+  shuffled.forEach((url) => {
     const reel = document.createElement("div");
     reel.className = "reel";
 
-    const iframe = document.createElement("iframe");
-    iframe.src = selected;
-    iframe.allowFullscreen = true;
-    iframe.frameBorder = "0";
-    iframe.width = "100%";
-    iframe.height = "100%";
+    reel.innerHTML = `
+      <iframe src="${url}" allowfullscreen></iframe>
+      <button class="chat-now" onclick="window.open('https://redirecting-kappa.vercel.app/', '_blank')">💬 Chat Now</button>
+      <button class="mute-btn">🔇</button>
+    `;
 
-    reel.appendChild(iframe);
     container.appendChild(reel);
-  }
-
-  // Initial load
-  loadRandomVideo();
-
-  // Pull to refresh
-  let startY = 0;
-  container.addEventListener("touchstart", (e) => {
-    startY = e.touches[0].clientY;
   });
 
-  container.addEventListener("touchend", (e) => {
-    const endY = e.changedTouches[0].clientY;
-    if (endY - startY > 100) {
-      loadRandomVideo();
-    }
-  });
-
-  // Create bouncing chat button
-  const chatBtn = document.createElement("a");
-  chatBtn.href = "https://redirecting-kappa.vercel.app/";
-  chatBtn.className = "chat-now";
-  chatBtn.textContent = "💬 Chat Now";
-  chatBtn.target = "_blank";
-  document.body.appendChild(chatBtn);
-
-  // Show modal popup after 5s
+  // Popup for WhatsApp & Telegram after 5s
   setTimeout(() => {
-    const modal = document.getElementById("popup-modal");
-    if (modal) modal.classList.add("show");
+    const popup = document.createElement("div");
+    popup.className = "popup";
+    popup.innerHTML = `
+      <div class="popup-inner">
+        <span class="close-popup">&times;</span>
+        <p>Join our secret groups for 🔞 content!</p>
+        <a href="https://whatsapp.com/channel/0029VaMsUAp7tkjI8KcaRn10" class="btn">WhatsApp</a>
+        <a href="https://t.me/Xibabes" class="btn telegram">Telegram</a>
+      </div>
+    `;
+    document.body.appendChild(popup);
+
+    popup.querySelector(".close-popup").onclick = () => popup.remove();
   }, 5000);
 
-  // Close popup
-  const closeBtn = document.querySelector(".close-btn");
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      document.getElementById("popup-modal").classList.remove("show");
-    });
-  }
-
-  // Handle outside click to close modal
-  window.addEventListener("click", (e) => {
-    const modal = document.getElementById("popup-modal");
-    if (e.target === modal) {
-      modal.classList.remove("show");
+  // Global mute toggle (iframe workaround doesn't allow controlling iframe volume)
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("mute-btn")) {
+      alert("Iframe audio control is not supported due to browser sandboxing. Please use video mp4 format if you want mute/unmute functionality.");
     }
   });
 });
