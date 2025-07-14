@@ -3,66 +3,140 @@
   padding: 0;
   box-sizing: border-box;
 }
-body, html {
+
+html, body {
   height: 100%;
   overflow: hidden;
-  background: #000;
   font-family: Arial, sans-serif;
+  background-color: #000;
+  color: white;
 }
+
 #reel-container {
   height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
 }
+
 .reel {
+  position: relative;
   height: 100vh;
   scroll-snap-align: start;
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #111;
 }
+
 .reel iframe {
   width: 100%;
   height: 100%;
   border: none;
+  object-fit: cover;
 }
-.play-overlay {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 10;
-  transition: transform 0.2s ease;
-}
-.play-overlay:hover {
-  transform: scale(1.1);
-}
-.play-overlay::before {
-  content: "▶️";
-  font-size: 32px;
-  color: #fff;
-}
-.chat-button {
+
+/* Chat Now Button */
+.chat-now {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #ff4081;
+  right: 15px;
+  bottom: 90px;
+  z-index: 999;
+  background-color: #ff69b4;
   color: #fff;
   padding: 12px 20px;
   border-radius: 30px;
-  font-weight: bold;
   text-decoration: none;
-  z-index: 999;
-  animation: bounce 2s infinite;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 0 10px #ff69b4;
+  animation: bounce 1.5s infinite;
 }
+
+/* Bounce Animation */
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-            }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(12, 0, 22, 0.85);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: #1c0e22;
+  padding: 30px 20px;
+  border-radius: 15px;
+  max-width: 350px;
+  text-align: center;
+  color: #ffe6f1;
+  box-shadow: 0 0 20px #ff69b4;
+  position: relative;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ff69b4;
+  cursor: pointer;
+}
+
+/* Popup Buttons */
+.btn-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: white;
+  transition: 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn.whatsapp {
+  background-color: #25d366;
+}
+
+.btn.telegram {
+  background-color: #0088cc;
+}
+
+.btn:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+  }
