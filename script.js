@@ -1,35 +1,69 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("video-container");
+document.addEventListener('DOMContentLoaded', () => {
+    const videoContainer = document.getElementById('video-container');
+    const chatButton = document.getElementById('chat-button');
+    const registerButton = document.getElementById('register-button');
+    const buttonsContainer = document.querySelector('.buttons-container');
+    const modal = document.getElementById('modal');
+    const closeButton = document.querySelector('.close-button');
 
-  // Randomize iframe links
-  const shuffled = videoLinks.sort(() => 0.5 - Math.random());
+    // Function to shuffle an array
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
 
-  shuffled.forEach(url => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "iframe-wrapper";
+    // Shuffle video links on load
+    shuffleArray(videoLinks);
 
-    const iframe = document.createElement("iframe");
-    iframe.src = url;
-    iframe.allowFullscreen = true;
-    iframe.loading = "lazy";
+    // Render videos
+    videoLinks.forEach(link => {
+        const slide = document.createElement('div');
+        slide.classList.add('video-slide');
+        const iframe = document.createElement('iframe');
+        iframe.src = link;
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+        iframe.setAttribute('allowfullscreen', '');
+        slide.appendChild(iframe);
+        videoContainer.appendChild(slide);
+    });
 
-    wrapper.appendChild(iframe);
-    container.appendChild(wrapper);
-  });
+    // Handle button clicks to make them disappear
+    chatButton.addEventListener('click', () => {
+        if (buttonsContainer) {
+            buttonsContainer.style.display = 'none';
+        }
+    });
 
-  // Chat and Register Buttons
-  const chatBtn = document.getElementById("chatBtn");
-  const registerBtn = document.getElementById("registerBtn");
+    registerButton.addEventListener('click', () => {
+        if (buttonsContainer) {
+            buttonsContainer.style.display = 'none';
+        }
+    });
 
-  chatBtn.addEventListener("click", () => chatBtn.style.display = "none");
-  registerBtn.addEventListener("click", () => registerBtn.style.display = "none");
+    // Show popup modal after 4 seconds
+    setTimeout(() => {
+        if (modal) {
+            modal.classList.add('show');
+        }
+    }, 4000);
 
-  // Popup after 4s
-  setTimeout(() => {
-    document.getElementById("popup").style.display = "flex";
-  }, 4000);
+    // Close modal
+    if (closeButton) {
+        closeButton.addEventListener('click', () => {
+            if (modal) {
+                modal.classList.remove('show');
+            }
+        });
+    }
 
-  document.getElementById("closePopup").onclick = () => {
-    document.getElementById("popup").style.display = "none";
-  };
+    // Close modal if user clicks outside of it
+    if (modal) {
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.classList.remove('show');
+            }
+        });
+    }
 });
