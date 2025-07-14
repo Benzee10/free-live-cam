@@ -1,40 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("video-container");
+  const container = document.getElementById("reel-container");
+  const randomLinks = [...videoLinks].sort(() => 0.5 - Math.random());
 
-  // Load video links from iframe.js
-  if (typeof videoLinks !== "undefined") {
-    const shuffled = videoLinks.sort(() => 0.5 - Math.random());
+  randomLinks.forEach(link => {
+    const reel = document.createElement("div");
+    reel.className = "reel";
 
-    shuffled.forEach(link => {
-      const wrapper = document.createElement("div");
-      wrapper.className = "video-wrapper";
+    const iframe = document.createElement("iframe");
+    iframe.src = link;
+    iframe.allowFullscreen = true;
+    iframe.scrolling = "no";
+    iframe.frameBorder = "0";
 
-      const iframe = document.createElement("iframe");
-      iframe.src = link;
-      iframe.allowFullscreen = true;
-      iframe.frameBorder = "0";
-      wrapper.appendChild(iframe);
-
-      container.appendChild(wrapper);
-    });
-  }
-
-  // Show popup after 5 seconds
-  setTimeout(() => {
-    document.getElementById("popup").classList.add("show");
-    document.getElementById("register-btn").style.display = "block";
-  }, 5000);
-
-  // Hide register on click
-  const regBtn = document.getElementById("register-btn");
-  regBtn.addEventListener("click", () => {
-    regBtn.style.display = "none";
+    reel.appendChild(iframe);
+    container.appendChild(reel);
   });
-});
 
-// Scroll down button logic
-function scrollToNext() {
-  const container = document.getElementById("video-container");
-  const scrollAmount = window.innerHeight;
-  container.scrollBy({ top: scrollAmount, behavior: "smooth" });
-}
+  // Popup logic
+  const popup = document.getElementById("popup");
+  const closeBtn = document.getElementById("close-popup");
+  setTimeout(() => popup.classList.add("show"), 5000);
+  closeBtn.addEventListener("click", () => popup.classList.remove("show"));
+
+  // Show register button after 5 seconds
+  setTimeout(() => {
+    document.querySelector(".register-btn").style.display = "block";
+  }, 5000);
+});
