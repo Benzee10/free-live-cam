@@ -1,100 +1,151 @@
-body, html {
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
   height: 100%;
   overflow: hidden;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   background: #000;
   color: #fff;
 }
 
-#reel-container {
-  height: 100%;
+#video-container {
+  height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
 }
 
-.reel {
-  height: 100%;
+#video-container iframe {
+  width: 100%;
+  height: 100vh;
+  border: none;
   scroll-snap-align: start;
-  position: relative;
+}
+
+/* CHAT NOW BUTTON (Left) */
+.chat-now-btn {
+  position: fixed;
+  left: 10px;
+  bottom: 80px;
+  background-color: #ff69b4;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  z-index: 999;
+  animation: bounce 1.5s infinite;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
 }
 
-.reel iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-.chat-now {
-  position: absolute;
+/* REGISTER NOW BUTTON (Left - Delayed) */
+.register-btn {
+  position: fixed;
   left: 10px;
-  bottom: 100px;
-  background: #ff69b4;
+  bottom: 140px;
+  background-color: #00b894;
   color: white;
-  border: none;
   padding: 12px 20px;
-  border-radius: 25px;
-  cursor: pointer;
+  border-radius: 30px;
   font-weight: bold;
+  text-decoration: none;
+  z-index: 999;
   animation: bounce 1.5s infinite;
-  z-index: 10;
+  display: none; /* will be shown after 5s by script */
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 0 15px rgba(0, 255, 200, 0.5);
 }
 
-.mute-btn {
-  position: absolute;
-  right: 10px;
-  bottom: 180px;
-  background: #444;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 10;
-}
-
+/* BOUNCE ANIMATION */
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
 
-/* Optional popup styling */
+/* POPUP STYLES */
 .popup {
+  display: none;
   position: fixed;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #111;
-  padding: 20px;
-  border-radius: 10px;
-  z-index: 999;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(12, 0, 22, 0.85);
+  justify-content: center;
+  align-items: center;
+}
+
+.popup.show {
+  display: flex;
+}
+
+.popup-content {
+  background: #1c0e22;
+  padding: 30px 20px;
+  border-radius: 15px;
   text-align: center;
-  box-shadow: 0 0 10px #ff69b4;
+  color: #ffe6f1;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 0 20px #ff69b4;
+  position: relative;
+  animation: bounceIn 0.7s ease;
 }
 
-.popup-inner .btn {
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.btn {
   display: inline-block;
-  margin: 10px;
-  padding: 12px 20px;
-  background: #25d366;
-  color: white;
+  padding: 12px 24px;
+  border-radius: 50px;
   text-decoration: none;
-  border-radius: 25px;
+  font-weight: bold;
+  color: white;
+  font-size: 0.9rem;
+  transition: 0.3s;
 }
 
-.popup-inner .btn.telegram {
-  background: #0088cc;
+.btn.whatsapp {
+  background-color: #25d366;
 }
 
-.close-popup {
+.btn.telegram {
+  background-color: #0088cc;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.close-btn {
   position: absolute;
-  top: 8px;
-  right: 12px;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ff69b4;
   cursor: pointer;
-  font-size: 20px;
-  color: #fff;
 }
+
+/* POPUP BOUNCE IN */
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); opacity: 1; }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+  }
