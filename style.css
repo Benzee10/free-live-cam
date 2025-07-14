@@ -8,17 +8,17 @@ body {
 }
 
 #video-container {
-  max-width: 760px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px 0;
-  height: 100vh;
+  height: 100%;
   overflow-y: auto;
   scroll-behavior: smooth;
 }
 
 iframe {
   width: 100%;
-  height: 400px; /* as you requested */
+  height: 100%; /* as you requested */
   border: none;
   margin-bottom: 20px;
 }
