@@ -1,173 +1,122 @@
-* {
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body, html {
-  height: 100%;
-  overflow: hidden;
-  font-family: 'Playfair Display', serif;
-  background: linear-gradient(180deg, #0b0b0b, #1c0e22);
-  color: #ffe6f1;
-  scroll-behavior: smooth;
-}
-#pull-refresh {
-  position: absolute;
-  top: -50px;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 1rem;
-  color: #ffe6f1;
-  padding: 10px;
-  transition: top 0.3s;
-  z-index: 999;
-  pointer-events: none;
+  background: #000;
+  color: white;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden;
 }
 
 #video-container {
-  height: 100%;
+  height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
-  -webkit-overflow-scrolling: touch;
 }
 
-.iframe-wrapper {
-  height: 100%;
-  scroll-snap-align: start;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.iframe-wrapper iframe {
+iframe {
   width: 100%;
-  height: 400;
+  height: 100vh;
+  scroll-snap-align: start;
   border: none;
 }
 
-/* Chat Now Button */
-#chat-now {
+.chat-now {
   position: fixed;
-  left: 15px;
-  bottom: 60px;
-  z-index: 1000;
-  background: #ff69b4;
-  color: #fff;
-  padding: 12px 20px;
-  border-radius: 25px;
-  font-weight: bold;
-  box-shadow: 0 0 10px #ff69b4;
-  animation: bounce 1.5s infinite;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-#chat-now:hover {
-  transform: scale(1.1);
-}
-
-/* Register Now Button */
-#register-now {
-  position: fixed;
-  left: 15px;
-  bottom: 120px;
-  z-index: 1000;
-  background: #00cc99;
+  bottom: 100px;
+  left: 10px;
+  background: #25d366;
   color: white;
-  padding: 12px 20px;
-  border-radius: 25px;
+  padding: 10px 20px;
+  border-radius: 30px;
   font-weight: bold;
-  box-shadow: 0 0 10px #00cc99;
-  cursor: pointer;
-  display: none;
+  text-decoration: none;
   animation: bounce 1.5s infinite;
+  z-index: 1000;
 }
 
-#register-now:hover {
-  transform: scale(1.1);
+.register-btn {
+  position: fixed;
+  bottom: 40px;
+  left: 10px;
+  background: #ff1493;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  font-size: 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  z-index: 1000;
+  display: none;
 }
 
 .popup {
-  display: none;
   position: fixed;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.85);
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: none;
   justify-content: center;
   align-items: center;
+  z-index: 1001;
+}
+
+.popup.show {
+  display: flex;
 }
 
 .popup-content {
-  background: #1c0e22;
+  background: #111;
   padding: 30px;
-  border-radius: 15px;
-  max-width: 400px;
-  width: 90%;
+  border-radius: 10px;
   text-align: center;
-  color: white;
-  border: 3px solid #ff69b4;
-  box-shadow: 0 0 20px #ff69b4;
-  animation: fadeIn 0.5s ease;
-}
-
-.popup-content .btn-group {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.btn {
-  background-color: #ff69b4;
-  color: white;
-  padding: 12px 18px;
-  border: none;
-  border-radius: 25px;
-  font-weight: bold;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  opacity: 0.9;
-  transform: scale(1.05);
-}
-
-.btn.whatsapp {
-  background-color: #25d366;
-}
-
-.btn.telegram {
-  background-color: #0088cc;
+  max-width: 90%;
+  box-shadow: 0 0 15px #ff69b4;
 }
 
 .close-btn {
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 20px;
-  font-size: 28px;
-  font-weight: bold;
-  color: #ff69b4;
+  font-size: 24px;
+  color: white;
   cursor: pointer;
 }
 
-/* Animations */
+.btn-group {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn {
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  color: white;
+}
+.btn.whatsapp {
+  background: #25d366;
+}
+.btn.telegram {
+  background: #0088cc;
+}
+
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-  }
+#pull-refresh {
+  position: fixed;
+  top: -50px;
+  width: 100%;
+  text-align: center;
+  background: #ff69b4;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  transition: top 0.3s ease;
+  z-index: 1002;
+}
