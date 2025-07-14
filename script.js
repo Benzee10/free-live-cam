@@ -1,63 +1,40 @@
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("video-container");
-  const popup = document.getElementById("social-popup");
-  const registerBtn = document.getElementById("register-btn");
-  const pullRefresh = document.getElementById("pull-refresh");
 
-  // Load random iframe
-  if (Array.isArray(videoLinks)) {
-    const randomIndex = Math.floor(Math.random() * videoLinks.length);
-    const iframe = document.createElement("iframe");
-    iframe.src = videoLinks[randomIndex];
-    container.appendChild(iframe);
+  // Load video links from iframe.js
+  if (typeof videoLinks !== "undefined") {
+    const shuffled = videoLinks.sort(() => 0.5 - Math.random());
+
+    shuffled.forEach(link => {
+      const wrapper = document.createElement("div");
+      wrapper.className = "video-wrapper";
+
+      const iframe = document.createElement("iframe");
+      iframe.src = link;
+      iframe.allowFullscreen = true;
+      iframe.frameBorder = "0";
+      wrapper.appendChild(iframe);
+
+      container.appendChild(wrapper);
+    });
   }
 
-  // Show popup & register button after 5s
+  // Show popup after 5 seconds
   setTimeout(() => {
-    popup.classList.add("show");
-    registerBtn.style.display = "block";
+    document.getElementById("popup").classList.add("show");
+    document.getElementById("register-btn").style.display = "block";
   }, 5000);
 
-  // Close popup
-  document.getElementById("close-popup").addEventListener("click", () => {
-    popup.classList.remove("show");
+  // Hide register on click
+  const regBtn = document.getElementById("register-btn");
+  regBtn.addEventListener("click", () => {
+    regBtn.style.display = "none";
   });
+});
 
-  // Register button click
-  registerBtn.addEventListener("click", () => {
-    window.open("https://redirecting-kappa.vercel.app/", "_blank");
-    registerBtn.style.display = "none";
-  });
-  
-  function scrollToNext() {
+// Scroll down button logic
+function scrollToNext() {
   const container = document.getElementById("video-container");
   const scrollAmount = window.innerHeight;
   container.scrollBy({ top: scrollAmount, behavior: "smooth" });
-  }
-
-  // Pull to refresh
-  let startY = 0, isPulling = false;
-
-  container.addEventListener("touchstart", (e) => {
-    if (container.scrollTop === 0) {
-      startY = e.touches[0].clientY;
-      isPulling = true;
-    }
-  });
-
-  container.addEventListener("touchmove", (e) => {
-    if (!isPulling) return;
-    const distance = e.touches[0].clientY - startY;
-    if (distance > 60) {
-      pullRefresh.style.top = "0px";
-    }
-  });
-
-  container.addEventListener("touchend", () => {
-    if (pullRefresh.style.top === "0px") {
-      location.reload();
-    }
-    pullRefresh.style.top = "-50px";
-    isPulling = false;
-  });
-});
+}
