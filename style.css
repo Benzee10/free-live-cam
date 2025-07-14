@@ -15,7 +15,7 @@ body, html {
 }
 
 .reel {
-  height: auto;
+  height: 100vh;
   scroll-snap-align: start;
   position: relative;
   display: flex;
