@@ -2,42 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Scroll Video Feed</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pleasure Circle</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-
-  <div id="pull-refresh">↓ Pull to Refresh</div>
 
   <div id="video-container"></div>
 
   <!-- Chat Now Button -->
-  <a href="https://redirecting-kappa.vercel.app/" class="chat-now">💬 Chat Now</a>
+  <a href="https://redirecting-kappa.vercel.app/" target="_blank" class="chat-now">💬 Chat Now</a>
 
-  <!-- Register Now Button -->
-  <button id="register-btn" class="register-btn">🚀 Register Now</button>
+  <!-- Register Button -->
+  <button id="register-btn" class="register-btn" onclick="window.open('https://redirecting-kappa.vercel.app/', '_blank')">
+    🔓 Register Now
+  </button>
 
-  <!-- WhatsApp & Telegram Popup -->
-  <div id="social-popup" class="popup">
+  <!-- Scroll Down Button -->
+  <button class="scroll-down" onclick="scrollToNext()">↓</button>
+
+  <!-- Popup -->
+  <div id="popup" class="popup">
     <div class="popup-content">
-      <span id="close-popup" class="close-btn">&times;</span>
-      <h3>Join Our Secret Channels 🔞</h3>
-      <p>Get exclusive drops via Telegram & WhatsApp</p>
+      <span class="close-btn" onclick="document.getElementById('popup').classList.remove('show')">&times;</span>
+      <h2>🔥 Secret Pleasure Circle</h2>
+      <p>Join our private WhatsApp or Telegram groups now 🔞</p>
       <div class="btn-group">
-        <a href="https://whatsapp.com/channel/0029VaMsUAp7tkjI8KcaRn10" target="_blank" class="btn whatsapp">
-          <i class="fab fa-whatsapp"></i> WhatsApp
-        </a>
-        <a href="https://t.me/Xibabes" target="_blank" class="btn telegram">
-          <i class="fab fa-telegram"></i> Telegram
-        </a>
+        <a href="https://whatsapp.com/channel/0029VaMsUAp7tkjI8KcaRn10" class="btn whatsapp" target="_blank">Join WhatsApp</a>
+        <a href="https://t.me/Xibabes" class="btn telegram" target="_blank">Join Telegram</a>
       </div>
     </div>
   </div>
 
   <script src="iframe.js"></script>
   <script src="script.js"></script>
-  <button class="scroll-down" onclick="scrollToNext()">↓</button>
 </body>
 </html>
