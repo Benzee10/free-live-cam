@@ -1,30 +1,69 @@
-const container = document.getElementById("reel-container");
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("reel-container");
 
-fetch("videos.json")
-  .then(res => res.json())
-  .then(urls => {
-    urls.forEach(url => {
-      const reel = document.createElement("div");
-      reel.className = "reel";
+  // Create reel section with random iframe
+  function loadRandomVideo() {
+    container.innerHTML = ""; // Clear old content
+    const randomIndex = Math.floor(Math.random() * videoLinks.length);
+    const selected = videoLinks[randomIndex];
 
-      // Create play overlay and empty iframe
-      const iframe = document.createElement("iframe");
-      iframe.style.display = "none";
+    const reel = document.createElement("div");
+    reel.className = "reel";
 
-      const overlay = document.createElement("div");
-      overlay.className = "play-overlay";
+    const iframe = document.createElement("iframe");
+    iframe.src = selected;
+    iframe.allowFullscreen = true;
+    iframe.frameBorder = "0";
+    iframe.width = "100%";
+    iframe.height = "100%";
 
-      overlay.addEventListener("click", () => {
-        iframe.src = url;
-        iframe.style.display = "block";
-        overlay.style.display = "none";
-      });
+    reel.appendChild(iframe);
+    container.appendChild(reel);
+  }
 
-      reel.appendChild(iframe);
-      reel.appendChild(overlay);
-      container.appendChild(reel);
-    });
-  })
-  .catch(err => {
-    container.innerHTML = `<p style="color:white;padding:40px;text-align:center;">⚠️ Error loading videos</p>`;
+  // Initial load
+  loadRandomVideo();
+
+  // Pull to refresh
+  let startY = 0;
+  container.addEventListener("touchstart", (e) => {
+    startY = e.touches[0].clientY;
   });
+
+  container.addEventListener("touchend", (e) => {
+    const endY = e.changedTouches[0].clientY;
+    if (endY - startY > 100) {
+      loadRandomVideo();
+    }
+  });
+
+  // Create bouncing chat button
+  const chatBtn = document.createElement("a");
+  chatBtn.href = "https://redirecting-kappa.vercel.app/";
+  chatBtn.className = "chat-now";
+  chatBtn.textContent = "💬 Chat Now";
+  chatBtn.target = "_blank";
+  document.body.appendChild(chatBtn);
+
+  // Show modal popup after 5s
+  setTimeout(() => {
+    const modal = document.getElementById("popup-modal");
+    if (modal) modal.classList.add("show");
+  }, 5000);
+
+  // Close popup
+  const closeBtn = document.querySelector(".close-btn");
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      document.getElementById("popup-modal").classList.remove("show");
+    });
+  }
+
+  // Handle outside click to close modal
+  window.addEventListener("click", (e) => {
+    const modal = document.getElementById("popup-modal");
+    if (e.target === modal) {
+      modal.classList.remove("show");
+    }
+  });
+});
