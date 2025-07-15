@@ -29,7 +29,7 @@ iframe {
 .control-buttons {
   position: fixed;
   left: 10px;
-  bottom: 20%; /* <-- EDIT HERE TO ADJUST VERTICAL PLACEMENT */
+  bottom: 100%; /* <-- EDIT HERE TO ADJUST VERTICAL PLACEMENT */
   display: flex;
   flex-direction: column;
   gap: 12px;
