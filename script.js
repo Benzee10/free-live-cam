@@ -1,33 +1,35 @@
-window.addEventListener("DOMContentLoaded", () => {
-  // Shuffle video links
-  const shuffledLinks = [...videoLinks].sort(() => 0.5 - Math.random());
+document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("video-container");
 
-  shuffledLinks.forEach((link) => {
+  // Randomize iframe links
+  const shuffled = videoLinks.sort(() => 0.5 - Math.random());
+
+  shuffled.forEach(url => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "iframe-wrapper";
+
     const iframe = document.createElement("iframe");
-    iframe.src = link;
-    iframe.allow = "autoplay; fullscreen";
-    container.appendChild(iframe);
+    iframe.src = url;
+    iframe.allowFullscreen = true;
+    iframe.loading = "lazy";
+
+    wrapper.appendChild(iframe);
+    container.appendChild(wrapper);
   });
 
-  // Handle button clicks
-  const chatBtn = document.getElementById("chat-btn");
-  const registerBtn = document.getElementById("register-btn");
+  // Chat and Register Buttons
+  const chatBtn = document.getElementById("chatBtn");
+  const registerBtn = document.getElementById("registerBtn");
 
-  const hideButton = (e) => {
-    e.target.style.display = "none";
-  };
+  chatBtn.addEventListener("click", () => chatBtn.style.display = "none");
+  registerBtn.addEventListener("click", () => registerBtn.style.display = "none");
 
-  chatBtn.addEventListener("click", hideButton);
-  registerBtn.addEventListener("click", hideButton);
-
-  // Show popup after 5 seconds
+  // Popup after 4s
   setTimeout(() => {
-    document.getElementById("popup").classList.remove("hidden");
-  }, 5000);
+    document.getElementById("popup").style.display = "flex";
+  }, 4000);
 
-  // Close popup
-  document.getElementById("close-popup").addEventListener("click", () => {
-    document.getElementById("popup").classList.add("hidden");
-  });
+  document.getElementById("closePopup").onclick = () => {
+    document.getElementById("popup").style.display = "none";
+  };
 });
