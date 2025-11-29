@@ -1,8 +1,8 @@
 const videoLinks = [
-  "https://www.xerotica.com/embed/54154",
-  "https://www.xerotica.com/embed/52655",
-  "https://www.xerotica.com/embed/52356",
-  "https://www.xerotica.com/embed/51211",
-  "https://www.xerotica.com/embed/52501"
+  "https://www.xvideos.com/embedframe/okmfotk35f3",
+  "https://www.xvideos.com/embedframe/oklvadda43d",
+  "https://www.xvideos.com/embedframe/ohiptoo61d5",
+  "https://www.xvideos.com/embedframe/okmufhm5104",
+  "https://www.xvideos.com/embedframe/okmufho965f"
 ];
 
