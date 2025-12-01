@@ -1,8 +1,8 @@
 const videoLinks = [
-  "https://www.xvideos.com/embedframe/okmfotk35f3",
-  "https://www.xvideos.com/embedframe/oklvadda43d",
-  "https://www.xvideos.com/embedframe/ohiptoo61d5",
-  "https://www.xvideos.com/embedframe/okmufhm5104",
-  "https://www.xvideos.com/embedframe/okmufho965f"
+  "https://www.xvideos.com/embedframe/okapahh3364",
+  "https://www.xvideos.com/embedframe/okmpehv8dca",
+  "https://www.xvideos.com/embedframe/okmuhif2cee",
+  "https://www.xvideos.com/embedframe/okpdmhh1cc9",
+  "https://www.xvideos.com/embedframe/okpktpmd28d"
 ];
 
