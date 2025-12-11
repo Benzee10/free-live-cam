@@ -1,19 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.getElementById("video-container");
 
-  // Randomize iframe links
+  // Randomize video links
   const shuffled = videoLinks.sort(() => 0.5 - Math.random());
 
   shuffled.forEach(url => {
     const wrapper = document.createElement("div");
-    wrapper.className = "iframe-wrapper";
+    wrapper.className = "video-wrapper";
 
-    const iframe = document.createElement("iframe");
-    iframe.src = url;
-    iframe.allowFullscreen = true;
-    iframe.loading = "lazy";
+    const video = document.createElement("video");
+    video.src = url;
+    video.controls = true;
+    video.preload = "metadata";
+    video.playsInline = true;
+    video.loop = true;
 
-    wrapper.appendChild(iframe);
+    // Click to play/pause
+    video.addEventListener("click", () => {
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    });
+
+    wrapper.appendChild(video);
     container.appendChild(wrapper);
   });
 

@@ -1,8 +1,8 @@
 const videoLinks = [
-  "https://www.xvideos.com/embedframe/kciahlh617c",
-  "https://www.xvideos.com/embedframe/uuklpeh183b",
-  "https://www.xvideos.com/embedframe/klilmih5124",
-  "https://www.xvideos.com/embedframe/kltuebbebca",
-  "https://www.xvideos.com/embedframe/kcoviad2b52"
+  // Replace these with your actual MP4 video URLs
+  "https://example.com/video1.mp4",
+  "https://example.com/video2.mp4",
+  "https://example.com/video3.mp4",
+  "https://example.com/video4.mp4",
+  "https://example.com/video5.mp4"
 ];
-

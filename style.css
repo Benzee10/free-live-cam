@@ -18,11 +18,21 @@ body {
   scroll-snap-type: y mandatory;
 }
 
-iframe {
+.video-wrapper {
   width: 100%;
-  height: 100vh; /* Adjust to full screen */
-  border: none;
+  height: 100vh;
   scroll-snap-align: start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
 }
 
 /* Control Buttons (Chat and Register) */
