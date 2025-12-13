@@ -1,4 +1,4 @@
 const videoLinks = [
   // Replace these with your actual MP4 video URLs
-  "https://cdn1.44sex.com/upload/videos/2025/10/creamy%20teen%20slut%20banged%20hard%20by%20big%20dick%200AYsY%20%5B44sex.com%5D.mp4"
+  "https://baddiesonly.tv/get_file/1/f18c70833e648d6096b7260fc12d1598/16000/16999/16999.mp4/?rnd=1765586211451"
 ];
