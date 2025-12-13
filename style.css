@@ -64,12 +64,11 @@ video {
 }
 .floating-buttons {
   position: fixed;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+  right: 15px;
+  bottom: 30px;
   display: flex;
-  flex-direction: column;
-  gap: 15px;
+  flex-direction: row;
+  gap: 10px;
   z-index: 999;
 }
 
@@ -80,7 +79,8 @@ video {
   text-decoration: none;
   border-radius: 20px;
   font-weight: bold;
-  animation: bounce 1s infinite alternate;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 
