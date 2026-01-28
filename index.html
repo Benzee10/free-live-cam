@@ -1,36 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TikTok Style Viewer</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Rivera | Links</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <header class="profile-header">
+            <div class="avatar-container">
+                <img src="avatar.png" alt="Profile Photo" class="avatar">
+            </div>
+            <h1>Alex Rivera</h1>
+            <p class="tagline">Product Designer & Creative Technologist</p>
+        </header>
 
-  <div id="video-container"></div>
+        <main class="links-container">
+            <a href="#" class="link-card">
+                <span class="link-text">Portfolio</span>
+            </a>
+            <a href="#" class="link-card">
+                <span class="link-text">LinkedIn</span>
+            </a>
+            <a href="#" class="link-card">
+                <span class="link-text">Twitter / X</span>
+            </a>
+            <a href="#" class="link-card">
+                <span class="link-text">GitHub</span>
+            </a>
+            <a href="#" class="link-card">
+                <span class="link-text">Contact Me</span>
+            </a>
+        </main>
 
-  <!-- Floating Chat & Register Buttons -->
-  <div class="floating-buttons">
-    <a id="chatBtn" href="https://redirecting-kappa.vercel.app/" target="_blank">💬 Chat Now</a>
-    <a id="registerBtn" href="https://redirecting-kappa.vercel.app/" target="_blank">📝 Register</a>
-  </div>
-
-  <!-- Popup Modal -->
-  <div id="popup" class="popup">
-    <div class="popup-content">
-      <h3>Join Our Secret Channels 🔞</h3>
-      <p>Get exclusive videos via:</p>
-      <div class="btn-group">
-        <a href="https://whatsapp.com/channel/0029VaMsUAp7tkjI8KcaRn10" class="btn whatsapp">WhatsApp</a>
-        <a href="https://t.me/Xibabes" class="btn telegram">Telegram</a>
-      </div>
-      <span id="closePopup" class="close-btn">&times;</span>
+        <footer class="footer">
+            <p>&copy; 2026 Alex Rivera. All rights reserved.</p>
+        </footer>
     </div>
-  </div>
-
-  <script src="iframe.js"></script>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
-                                                       </html>
+</html>
