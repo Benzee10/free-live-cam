@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const popup = document.getElementById('promo-popup');
-  const redirectUrl = 'https://t.co/cVidV7FM82';           // ← Your Telegram link
+  const redirectUrl = 'https://whatsappad.vercel.app';           // ← Your Telegram link
   const STORAGE_KEY = 'naughtyPopupLastShown';             // changed key so it doesn't conflict with old versions
 
   function shouldShowPopup() {
